@@ -8,6 +8,7 @@ Created on Fri May 19 21:31:40 2017
 
 from urllib import urlopen
 from bs4 import BeautifulSoup
+import re
 
 def getAllLinks(bsObj):
     allLinks = []
@@ -18,7 +19,17 @@ def getAllLinks(bsObj):
     return allLinks
 
 def getBeautifulSoupObject(url):
+    
     html = urlopen(url)
     return BeautifulSoup(html)
 
-getAllLinks(getBeautifulSoupObject("https://www.en.wikipedia.org"))
+def getRefinedLinks(bsObj):
+    return bsObj.find("div", {"id":"bodyContent"}).findAll("a",href=re.compile("^(/wiki/)((?!:).)*$"))
+
+def printLinks(links):
+    for link in links:
+        print link
+    return
+
+#getAllLinks(getBeautifulSoupObject("https://en.wikipedia.org"))
+printLinks(getRefinedLinks(getBeautifulSoupObject("https://en.wikipedia.org/wiki/Python_(programming_language)")))
