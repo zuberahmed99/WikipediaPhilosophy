@@ -40,11 +40,22 @@ def extractURLFromAnchor(link):
     return link.attrs['href']
 
 def getParentOfAnchor(link):
-    print link.parent
+    #print link.parent
     return link.parent
 
-links = getRefinedLinks(getBeautifulSoupObject("https://en.wikipedia.org/wiki/Science"))
+def checkIfParentIsANote(link):
+    link = getParentOfAnchor(link)
+    link_str = str(link)
+    if link_str.find("role=\"note\"") == -1:
+        return False
+    return True
+    
 
-getParentOfAnchor(links[0])
+    
+
+#links = getRefinedLinks(getBeautifulSoupObject("https://en.wikipedia.org/wiki/Science"))
+#parent = getParentOfAnchor(links[0])
+#print parent
+#print checkIfParentIsANote(parent)
 #getAllLinks(getBeautifulSoupObject("https://en.wikipedia.org"))
 #printLinks(getRefinedLinks(getBeautifulSoupObject("https://en.wikipedia.org/wiki/Python_(programming_language)")))
