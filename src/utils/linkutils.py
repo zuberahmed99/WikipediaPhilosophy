@@ -18,8 +18,13 @@ def getAllLinks(bsObj):
             print links.attrs['href']
     return allLinks
 
+def getWikiBeautifulSoupObject(wikiURL):
+    if wikiURL.startswith("http"):
+        return getBeautifulSoupObject(wikiURL)
+    url = "https://en.wikipedia.org" + wikiURL
+    return getBeautifulSoupObject(url)
+
 def getBeautifulSoupObject(url):
-    
     html = urlopen(url)
     return BeautifulSoup(html)
 
@@ -31,5 +36,15 @@ def printLinks(links):
         print link
     return
 
+def extractURLFromAnchor(link):
+    return link.attrs['href']
+
+def getParentOfAnchor(link):
+    print link.parent
+    return link.parent
+
+links = getRefinedLinks(getBeautifulSoupObject("https://en.wikipedia.org/wiki/Science"))
+
+getParentOfAnchor(links[0])
 #getAllLinks(getBeautifulSoupObject("https://en.wikipedia.org"))
-printLinks(getRefinedLinks(getBeautifulSoupObject("https://en.wikipedia.org/wiki/Python_(programming_language)")))
+#printLinks(getRefinedLinks(getBeautifulSoupObject("https://en.wikipedia.org/wiki/Python_(programming_language)")))

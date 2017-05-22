@@ -10,12 +10,14 @@ import time
 PHILOSOPHY_ARTICLE = "wiki/Philosophy"
 
 def crawlFirstLink(startLink):
+    print startLink
     bsObj = linkutils.getWikiBeautifulSoupObject(startLink)
     links = linkutils.getRefinedLinks(bsObj)
     return linkutils.extractURLFromAnchor(links[0])
 
 def getHops(startLink):
     count = 0
+    
     while startLink != PHILOSOPHY_ARTICLE:
         startLink = crawlFirstLink(startLink)
         time.sleep(0.1)
@@ -23,6 +25,6 @@ def getHops(startLink):
     return count
 
 def main():
-    getHops("https://en.wikipedia.org/wiki/Science")
+    getHops("https://en.wikipedia.org/wiki/Machiavellianism")
     
 main()
