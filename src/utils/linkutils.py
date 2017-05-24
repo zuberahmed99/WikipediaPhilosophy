@@ -39,18 +39,27 @@ def printLinks(links):
 def extractURLFromAnchor(link):
     return link.attrs['href']
 
-def getParentOfAnchor(link):
+def getParentOfAnchor(link, count):
     #print link.parent
-    return link.parent
+    for i in range (count):
+        link = link.parent
+    return link
 
 def checkIfParentIsANote(link):
-    link = getParentOfAnchor(link)
+    link = getParentOfAnchor(link,1)
     link_str = str(link)
     if link_str.find("role=\"note\"") == -1:
         return False
     return True
     
+def checkIfAncestorIsAHiddenTable(link):
+    link = getParentOfAnchor(link,3)
+    link_str = str(link)
+    nav_content = link_str.find("class=\"hlist\"") == -1
+    nav_head = link_str.find("class=\"NavHead\"") == -1
 
+
+    return nav_content or nav_head
     
 
 #links = getRefinedLinks(getBeautifulSoupObject("https://en.wikipedia.org/wiki/Science"))
@@ -58,4 +67,4 @@ def checkIfParentIsANote(link):
 #print parent
 #print checkIfParentIsANote(parent)
 #getAllLinks(getBeautifulSoupObject("https://en.wikipedia.org"))
-#printLinks(getRefinedLinks(getBeautifulSoupObject("https://en.wikipedia.org/wiki/Python_(programming_language)")))
+#printLinks(getRefinedLinks(getBeautifulSoupObject("https://en.wikipedia.org/wiki/Science")))
