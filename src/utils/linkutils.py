@@ -48,23 +48,35 @@ def getParentOfAnchor(link, count):
 def checkIfParentIsANote(link):
     link = getParentOfAnchor(link,1)
     link_str = str(link)
-    if link_str.find("role=\"note\"") == -1:
+    first_line = extractFirstLineOfBeautifulSoupObject(link_str)
+    if first_line.find("role=\"note\"") == -1:
         return False
     return True
     
 def checkIfAncestorIsAHiddenTable(link):
     link = getParentOfAnchor(link,3)
     link_str = str(link)
-    nav_content = link_str.find("class=\"hlist\"") == -1
-    nav_head = link_str.find("class=\"NavHead\"") == -1
-
-
+    link_str = str(link)
+    first_line = extractFirstLineOfBeautifulSoupObject(link_str)
+    nav_content = first_line.find("class=\"hlist\"") == -1
+    nav_head = first_line.find("class=\"NavHead\"") == -1
     return nav_content or nav_head
-    
+
+def extractFirstLineOfBeautifulSoupObject(link):
+    link_str = str(link)
+    firstline = ""
+    if link_str.startswith("<div>"):
+
+        index = link_str.find("</div>")
+        firstline = link_str[index]
+    #to do
+    return firstline
+
 
 #links = getRefinedLinks(getBeautifulSoupObject("https://en.wikipedia.org/wiki/Science"))
-#parent = getParentOfAnchor(links[0])
+#parent = getParentOfAnchor(links[288],2)
 #print parent
+#print extractFirstLineOfBeautifulSoupObject(parent)
 #print checkIfParentIsANote(parent)
 #getAllLinks(getBeautifulSoupObject("https://en.wikipedia.org"))
-#printLinks(getRefinedLinks(getBeautifulSoupObject("https://en.wikipedia.org/wiki/Science")))
+#printLinks(getRefinedLinks(getBeautifulSoupObject("https://en.wikipedia.org/wiki/Knowledge")))

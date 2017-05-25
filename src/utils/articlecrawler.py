@@ -16,6 +16,8 @@ def crawlFirstLink(startLink):
     links = linkutils.getRefinedLinks(bsObj)
     while linkutils.checkIfParentIsANote(links[index]) or linkutils.checkIfAncestorIsAHiddenTable(links[index]):
         index = index + 1
+
+
     return linkutils.extractURLFromAnchor(links[index])
 
 def getHops(startLink):
@@ -28,6 +30,6 @@ def getHops(startLink):
     return count
 
 def main():
-    getHops("https://en.wikipedia.org/wiki/Knowledge")
+    getHops("https://en.wikipedia.org/wiki/Science")
     
 main()
