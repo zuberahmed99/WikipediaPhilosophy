@@ -72,6 +72,14 @@ def extractFirstLineOfBeautifulSoupObject(link):
     #to do
     return firstline
 
+def getParagraphs(bsObj):
+    return bsObj.find("p");
+
+def getFirstAnchorTag(link):
+    link = getParagraphs(link)
+    return link.find("a",href=re.compile("^(/wiki/)((?!:).)*$"))
+
+
 
 #links = getRefinedLinks(getBeautifulSoupObject("https://en.wikipedia.org/wiki/Science"))
 #parent = getParentOfAnchor(links[288],2)
@@ -80,3 +88,4 @@ def extractFirstLineOfBeautifulSoupObject(link):
 #print checkIfParentIsANote(parent)
 #getAllLinks(getBeautifulSoupObject("https://en.wikipedia.org"))
 #printLinks(getRefinedLinks(getBeautifulSoupObject("https://en.wikipedia.org/wiki/Knowledge")))
+#print getFirstAnchorTag(getBeautifulSoupObject("https://en.wikipedia.org/wiki/Science"))

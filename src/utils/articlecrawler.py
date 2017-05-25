@@ -7,18 +7,15 @@ Created on Sun May 21 02:03:11 2017
 import linkutils
 import time
 
-PHILOSOPHY_ARTICLE = "wiki/Philosophy"
+PHILOSOPHY_ARTICLE = "/wiki/Science"
 
 def crawlFirstLink(startLink):
     print startLink
     index = 0
     bsObj = linkutils.getWikiBeautifulSoupObject(startLink)
-    links = linkutils.getRefinedLinks(bsObj)
-    while linkutils.checkIfParentIsANote(links[index]) or linkutils.checkIfAncestorIsAHiddenTable(links[index]):
-        index = index + 1
+    link = linkutils.getFirstAnchorTag(bsObj)
 
-
-    return linkutils.extractURLFromAnchor(links[index])
+    return linkutils.extractURLFromAnchor(link)
 
 def getHops(startLink):
     count = 0
@@ -27,9 +24,11 @@ def getHops(startLink):
         startLink = crawlFirstLink(startLink)
         time.sleep(0.1)
         count += 1
+        if str(startLink) == PHILOSOPHY_ARTICLE:
+            break
     return count
 
 def main():
-    getHops("https://en.wikipedia.org/wiki/Science")
+    print getHops("https://en.wikipedia.org/wiki/Cat")
     
 main()
