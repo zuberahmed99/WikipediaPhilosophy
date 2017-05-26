@@ -24,11 +24,10 @@ def getHops(startLink):
         startLink = crawlFirstLink(startLink)
         time.sleep(0.1)
         count += 1
-        if str(startLink) == PHILOSOPHY_ARTICLE:
-            break
+
     return count
 
 def main():
-    print getHops("https://en.wikipedia.org/wiki/Cat")
+    print getHops("https://en.wikipedia.org/wiki/Cricket")
     
 main()
