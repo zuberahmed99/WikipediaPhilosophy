@@ -6,7 +6,7 @@ Created on Sun May 21 02:03:11 2017
 """
 import linkutils
 import time
-
+RANDOM_ARTICLE = "http://en.wikipedia.org/wiki/Special:Random"
 PHILOSOPHY_ARTICLE = "/wiki/Science"
 
 def crawlFirstLink(startLink):
@@ -27,7 +27,12 @@ def getHops(startLink):
 
     return count
 
+def randomArticleCrawler(num):
+    for i in range(num):
+        print "crawling random article "
+        getHops(RANDOM_ARTICLE)
+
 def main():
-    print getHops("https://en.wikipedia.org/wiki/Cricket")
+    randomArticleCrawler(5)
     
 main()
