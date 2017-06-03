@@ -9,7 +9,7 @@ import time
 RANDOM_ARTICLE = "http://en.wikipedia.org/wiki/Special:Random"
 PHILOSOPHY_ARTICLE = "/wiki/Science"
 
-def crawlFirstLink(startLink):
+def crawl_first_link(startLink):
     print startLink
     index = 0
     bsObj = linkutils.getWikiBeautifulSoupObject(startLink)
@@ -17,22 +17,22 @@ def crawlFirstLink(startLink):
 
     return linkutils.extractURLFromAnchor(link)
 
-def getHops(startLink):
+def get_hops(startLink):
     count = 0
 
     while startLink != PHILOSOPHY_ARTICLE:
-        startLink = crawlFirstLink(startLink)
+        startLink = crawl_first_link(startLink)
         time.sleep(0.1)
         count += 1
 
     return count
 
-def randomArticleCrawler(num):
+def random_article_crawler(num):
     for i in range(num):
         print "crawling random article "
-        getHops(RANDOM_ARTICLE)
+        get_hops(RANDOM_ARTICLE)
 
 def main():
-    randomArticleCrawler(5)
+    random_article_crawler(5)
     
 main()
