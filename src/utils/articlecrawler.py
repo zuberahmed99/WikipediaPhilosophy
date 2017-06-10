@@ -12,10 +12,10 @@ PHILOSOPHY_ARTICLE = "/wiki/Science"
 def crawl_first_link(startLink):
     print startLink
     index = 0
-    bsObj = linkutils.getWikiBeautifulSoupObject(startLink)
-    link = linkutils.getFirstAnchorTag(bsObj)
+    bsObj = linkutils.get_wiki_beautiful_soup_object(startLink)
+    link = linkutils.get_first_anchor_tag(bsObj)
 
-    return linkutils.extractURLFromAnchor(link)
+    return linkutils.extract_url_from_anchor(link)
 
 def get_hops(startLink):
     count = 0
